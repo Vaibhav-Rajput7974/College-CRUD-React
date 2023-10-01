@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { deleteClg, getClgById } from '../slices/CollegeCrud';
-import { getAllStudents } from '../slices/StudentCrud';
+import { deleteClg} from '../slices/CollegeCrud';
+import { getStudents } from '../slices/StudentCrud';
 
 function AllColleges() {
   const navigate=useNavigate();
   const dispatch = useDispatch();
   
   const {colleges} = useSelector((state) => state.AllCollege)
+  
   function DeleteCollege(id) {  
     axios.delete('/users/'+id)
       .then((response) => {
         dispatch(deleteClg(response.data));
         navigate('/home')
-
         console.log('Data successfully posted:', response.data);
       })
       .catch((error) => {
@@ -26,15 +26,15 @@ function AllColleges() {
     function ShowStudents(id) {  
       axios.get('/users/'+id)
         .then((response) => {
-          dispatch(getClgById(response.data.id));
-          navigate('/getCollege/id')
-          console.log('Data successfully posted:', response.data);
+          dispatch(getStudents(response.data));
+           navigate('/getCollege/id')
+          // console.log('Data successfully posted:', response.data);
         })
         .catch((error) => {
           console.error('Error posting data:', error);
-        });
-      };
-  
+      });
+    };
+    
       
   
   return (
@@ -66,7 +66,8 @@ function AllColleges() {
             <td className="table-success" > <button onClick={() => DeleteCollege(item.id)}>Delete</button></td>
 
              <td className="table-success"><button>Update</button></td>
-             <td className="table-success"><button>Add Students</button></td>
+       
+             <td className="table-success"><button onClick={()=>navigate(`/addstudents?colleges=${item.id}`)}>Add Students</button></td>
             </tr>
             </>
           ))}
@@ -76,6 +77,7 @@ function AllColleges() {
       )}
       </table>
       <button type="button" onClick={()=>navigate('/add')} className="btn btn-success" >addCollege</button>
+      
       </center>
     </div>
   );

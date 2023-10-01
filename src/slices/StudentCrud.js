@@ -7,10 +7,13 @@ const StudentCrud=createSlice({
     name:"StudentCrud",
     initialState:intialState,
     reducers:{
-        getAllStudents:(state,action)=>{
-            state.students=action.payload;
+        getStudents :(state,action)=>{
+            state.college = action.payload;
         },
+        deleteStudents :(state,action)=>{
+            state.colleges = state.colleges.filter(item => item.id !== action.payload);
+        }
     }
 });
-export const{getAllStudents} = StudentCrud.actions;
+export const{getStudents,deleteStudents} = StudentCrud.actions;
 export default StudentCrud.reducer;

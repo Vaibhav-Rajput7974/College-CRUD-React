@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AddCollege from './college/AddCollege';
 import AllColleges from './college/AllColleges';
 import GetCollegeById from './college/GetCollegeById';
+import AddStudents from './college/AddStudents';
 function App() {
   const dispath=useDispatch();
   const [data, setData] = useState(null);
@@ -20,8 +21,9 @@ function App() {
       }
     };
     fetchData();
-    
+
   }, []); 
+  
   dispath(getAllCollege(data));
 
 
@@ -33,6 +35,7 @@ function App() {
           <Route  path='add'  element={<AddCollege/>}/>
           <Route  path=''  element={<AddCollege/>}/>
           <Route path='getCollege/id' element={<GetCollegeById/>}/>
+          <Route path='addstudents' element={<AddStudents/>}/>
           
         </Routes>
     </BrowserRouter>
