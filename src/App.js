@@ -11,6 +11,7 @@ import AddStudents from './college/AddStudents';
 import Update from './college/Update';
 function App() {
   const dispath=useDispatch();
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

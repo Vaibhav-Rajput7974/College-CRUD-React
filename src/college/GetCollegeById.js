@@ -8,8 +8,13 @@ function GetCollegeById() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  
- 
+  const {colleges} = useSelector((state) => state.AllCollege);
+  const queryParams = new URLSearchParams(window.location.search)
+  const id = queryParams.get("id")
+  // con???sole.log(id);
+  const {students} = colleges.find(college => college.id == id);
+  // console.log(students);
+
   function DeleteStudents(id) {  
     console.log(id);
     axios.delete('/users/students/'+id)
@@ -23,8 +28,8 @@ function GetCollegeById() {
       });
     };
     
-  const students = useSelector((state) => state.AllStudent.students)
-  console.log('sssssss',students);
+    
+  // console.log('sssssss',students);
   return (
     <div>
       <h2>Student Management</h2>
@@ -62,7 +67,7 @@ function GetCollegeById() {
       <td className="table-success"><button onClick={()=>navigate(`/addstudents?colleges`)}>addStudents</button></td>
       </center>
     </div>
-  );
+ );
 }
 
 export default GetCollegeById;

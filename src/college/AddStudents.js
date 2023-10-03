@@ -4,6 +4,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import axios from 'axios';
 import { addStudents } from '../slices/StudentCrud';
+import { addClgInStudents } from '../slices/CollegeCrud';
 
 const AddStudents = (props) => {
   // const { colleges } = useParams();
@@ -25,8 +26,9 @@ const AddStudents = (props) => {
     function postStudents(students){
         axios.post('/users/'+colleges+'/students', students)
       .then((response) => {
-          dispatch(addStudents(response.data));
-          navigate(`/getCollege/id?colleges=${colleges}`)
+          dispatch(addClgInStudents({response:response.data,
+            id:colleges}));
+          navigate(`/getCollege/id?id=${colleges}`)
 
         console.log('Data successfully posted:', response.data);
       })

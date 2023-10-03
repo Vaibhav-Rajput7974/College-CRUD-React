@@ -14,6 +14,7 @@ const StudentCrud=createSlice({
             state.students = students;
         },
         deleteStudents :(state,action)=>{
+            console.log('////////',action.payload);
             const {id}=action.payload;
             state.students = state.students.filter((item) => item.id !== id);
 

@@ -24,15 +24,8 @@ function AllColleges() {
     };
 
     function ShowStudents(id) {  
-      axios.get('/users/'+id)
-        .then((response) => {
-          dispatch(getStudents(response.data));
-           navigate('/getCollege/id')
-           console.log('Data successfully posted:', response.data);
-        })
-        .catch((error) => {
-          console.error('Error posting data:', error);
-      });
+      navigate(`/getCollege/id?id=${id}`);
+      
     };
     
     function UpdateHandel(num1,num2){

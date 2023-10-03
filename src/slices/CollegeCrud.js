@@ -29,7 +29,18 @@ const CollegeCrud=createSlice({
             obj.id === data.id ? data : obj);
             console.log(current(state));
         },
+        addClgInStudents :(state,action)=>{
+            const { id, response } = action.payload;
+           console.log(response,id);
+           const index = state.colleges.findIndex(college => college.id == id);
+            console.log(index);
+            if(index!==-1){
+                state.colleges[index].students.push(response);
+            }
+        },
+        
+        
     }
 });
-export const{getAllCollege,addCollege,deleteClg,updateCollege} = CollegeCrud.actions;
+export const{getAllCollege,addCollege,deleteClg,updateCollege,addClgInStudents} = CollegeCrud.actions;
 export default CollegeCrud.reducer;
