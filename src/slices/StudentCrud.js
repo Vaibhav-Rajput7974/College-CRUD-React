@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, current } from "@reduxjs/toolkit"
+import { act } from "react-dom/test-utils";
 
 const intialState={
-    singelClg:[]
+    students:[]
 }
 
 const StudentCrud=createSlice({
@@ -9,19 +10,24 @@ const StudentCrud=createSlice({
     initialState:intialState,
     reducers:{
         getStudents :(state,action)=>{
-            console.log(action.payload);
-            state.singelClg = action.payload;
+            const {students} = action.payload;
+            state.students = students;
         },
         deleteStudents :(state,action)=>{
-
             const {id}=action.payload;
-            state.singelClg = state.singelClg.students.filter((item) => item.id !== id);
+            state.students = state.students.filter((item) => item.id !== id);
+
         },
         addStudents:(state,action)=>{
-            state.singelClg = action.payload;
+            state.students.push(action.payload);
         },
         updateStudets:(state,action)=>{
-            state.singelClg = action.payload;
+            const data = action.
+            payload;
+
+            state.students = state.students.map(obj =>
+            obj.id === data.id ? data : obj);
+            console.log(current(state));
         }
     }
 });

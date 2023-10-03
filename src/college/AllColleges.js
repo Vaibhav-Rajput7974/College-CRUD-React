@@ -28,7 +28,7 @@ function AllColleges() {
         .then((response) => {
           dispatch(getStudents(response.data));
            navigate('/getCollege/id')
-          // console.log('Data successfully posted:', response.data);
+           console.log('Data successfully posted:', response.data);
         })
         .catch((error) => {
           console.error('Error posting data:', error);

@@ -8,13 +8,14 @@ function GetCollegeById() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  
  
   function DeleteStudents(id) {  
     console.log(id);
     axios.delete('/users/students/'+id)
       .then((response) => {
         dispatch(deleteStudents(response.data));
-        navigate('/getCollege/id');
+        navigate(`/getCollege/id?colleges=${id}`);
         console.log('Data successfully posted:', response.data);
       })
       .catch((error) => {
@@ -22,7 +23,8 @@ function GetCollegeById() {
       });
     };
     
-  const {singelClg} = useSelector((state) => state.AllStudent)
+  const students = useSelector((state) => state.AllStudent.students)
+  console.log('sssssss',students);
   return (
     <div>
       <h2>Student Management</h2>
@@ -38,9 +40,9 @@ function GetCollegeById() {
           </tr>
           </thead>
           
-      {singelClg? (
+      {students? (
         <tbody>
-          {singelClg.students.map(item => (
+          {students?.map(item => (
             <><tr>
              <td className="table-success">{item.id}</td>
              <td className="table-success">{item.name}</td>
@@ -57,7 +59,7 @@ function GetCollegeById() {
         <p>Loading...</p>
       )}
       </table>
-      <td className="table-success"><button onClick={()=>navigate(`/addstudents?colleges=${singelClg.id}`)}>addStudents</button></td>
+      <td className="table-success"><button onClick={()=>navigate(`/addstudents?colleges`)}>addStudents</button></td>
       </center>
     </div>
   );
