@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCollege, addStudents } from '../slices/CollegeCrud';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import axios from 'axios';
+import { addStudents } from '../slices/StudentCrud';
 
 const AddStudents = (props) => {
   // const { colleges } = useParams();
   // console.log(colleges);
+  const navigate=useNavigate();
   const dispatch=useDispatch();
   const queryParams = new URLSearchParams(window.location.search)
   const colleges = queryParams.get("colleges")
@@ -18,13 +19,14 @@ const AddStudents = (props) => {
             name: num1,
             email: num2
         }
+        console.log(students);
         postStudents(students);
     }
     function postStudents(students){
         axios.post('/users/'+colleges+'/students', students)
       .then((response) => {
           dispatch(addStudents(response.data));
-        //  navigate('/home')
+          navigate(`/getCollege/id?colleges=${colleges}`)
 
         console.log('Data successfully posted:', response.data);
       })

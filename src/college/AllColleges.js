@@ -35,6 +35,11 @@ function AllColleges() {
       });
     };
     
+    function UpdateHandel(num1,num2){
+      console.log(num1);
+      console.log(num2);
+      //navigate(`/update?name=${num1}&location=${num2}`)
+    }
       
   
   return (
@@ -46,7 +51,7 @@ function AllColleges() {
             <tr>
             <th  scope="col">Id</th>
             <th scope="col">Name</th>
-            <th scope="col">Email</th>
+            <th scope="col">location</th>
             <th scope="col">Students</th>
             <th scope="col">Delete</th>
             <th scope="col">Update</th>
@@ -58,14 +63,14 @@ function AllColleges() {
         <tbody>
           {colleges.map(item => (
             <><tr>
-             <td className="table-success">{item.id}</td>
-             <td className="table-success">{item.name}</td>
-             <td className="table-success">{item.location}</td>
+             <td className="table-success"  id="name" >{item.id}</td>
+             <td className="table-success" >{item.name}</td>
+             <td className="table-success" id="location" >{item.location}</td>
              <td className="table-success"><button onClick={() => ShowStudents(item.id)}>ShowStudents</button></td>
              
             <td className="table-success" > <button onClick={() => DeleteCollege(item.id)}>Delete</button></td>
 
-             <td className="table-success"><button>Update</button></td>
+             <td className="table-success"><button onClick={()=>navigate(`/update?colleges=${item.id}`)}>Update</button></td>
        
              <td className="table-success"><button onClick={()=>navigate(`/addstudents?colleges=${item.id}`)}>Add Students</button></td>
             </tr>

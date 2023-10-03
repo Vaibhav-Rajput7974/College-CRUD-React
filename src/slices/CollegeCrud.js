@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, current } from "@reduxjs/toolkit"
 
 const intialState={
     colleges: []
@@ -12,19 +12,24 @@ const CollegeCrud=createSlice({
             state.colleges=action.payload;
         },
         addCollege:(state,action)=>{
-            //  console.log(action.payload);
+             console.log('state >>>>>>>>>>>>>>>>>',current(state) );
             state.colleges.push(action.payload);
         }, 
         deleteClg :(state,action)=>{
-            // console.log('????, ', state, '><<<<<< >>>>',action)
-            state.colleges = state.colleges.filter(item => item.id !== action.payload);
-        }, 
-        addStudents:(state,action)=>{
-           state.colleges.map(item => item.id === action.payload.id?item=action.payload:null)
-          
-        }
-        
+            const {id}=action.payload;
+            state.colleges = state.colleges.filter((item) => item.id !== id);
+            
+            console.log(state.colleges);
+        },
+        updateCollege :(state,action)=>{
+
+            const data = action.payload;
+
+            state.colleges = state.colleges.map(obj =>
+            obj.id === data.id ? data : obj);
+            console.log(current(state));
+        },
     }
 });
-export const{getAllCollege,addCollege,deleteClg,addStudents} = CollegeCrud.actions;
+export const{getAllCollege,addCollege,deleteClg,updateCollege} = CollegeCrud.actions;
 export default CollegeCrud.reducer;

@@ -8,23 +8,21 @@ function GetCollegeById() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  
-  function DeleteCollege(id) {  
+ 
+  function DeleteStudents(id) {  
     console.log(id);
     axios.delete('/users/students/'+id)
       .then((response) => {
-        // dispatch(deleteStudents(response.data));
-        navigate('/addstudents')
+        dispatch(deleteStudents(response.data));
+        navigate('/getCollege/id');
         console.log('Data successfully posted:', response.data);
       })
       .catch((error) => {
         console.error('Error posting data:', error);
       });
     };
-
     
-  const {college} = useSelector((state) => state.AllStudent)
-  console.log(college);
+  const {singelClg} = useSelector((state) => state.AllStudent)
   return (
     <div>
       <h2>Student Management</h2>
@@ -40,17 +38,17 @@ function GetCollegeById() {
           </tr>
           </thead>
           
-      {college? (
+      {singelClg? (
         <tbody>
-          {college.students.map(item => (
+          {singelClg.students.map(item => (
             <><tr>
              <td className="table-success">{item.id}</td>
              <td className="table-success">{item.name}</td>
              <td className="table-success">{item.email}</td>
              {/* <td className="table-success"><button onClick={() => ShowStudents(item.id)}>Update</button></td>
               */}
-             <td className="table-success" > <button onClick={() => DeleteCollege(item.id)}>Delete</button></td>
- 
+             <td className="table-success" > <button onClick={() => DeleteStudents(item.id)}>Delete</button></td>
+             <td className="table-success" > <button >Update</button></td>
             </tr>
             </>
           ))}
@@ -59,7 +57,7 @@ function GetCollegeById() {
         <p>Loading...</p>
       )}
       </table>
-      <button type="button"  className="btn btn-success" >add Students</button>
+      <td className="table-success"><button onClick={()=>navigate(`/addstudents?colleges=${singelClg.id}`)}>addStudents</button></td>
       </center>
     </div>
   );
