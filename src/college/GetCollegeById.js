@@ -13,8 +13,17 @@ function GetCollegeById() {
   const queryParams = new URLSearchParams(window.location.search)
   const id = queryParams.get("id")
   
-  const {students} = colleges.find(college => college.id == id);
-
+  const[students,setstudents] =useState(null);
+  useEffect(() => {
+    axios.get('/users/'+id+'/students')
+    .then((response) => { 
+      setstudents(response.data);
+    })
+    .catch((error) => {
+      console.error('Error posting data:', error);
+  });
+  }, []); 
+  
   function DeleteStudents(DeleteId) {  
     console.log(DeleteId);
     axios.delete('/users/students/'+DeleteId)
@@ -32,6 +41,7 @@ function GetCollegeById() {
         console.error('Error posting data:', error);
       });
     };
+    
     
     
   // console.log('sssssss',students);
@@ -57,8 +67,8 @@ function GetCollegeById() {
              <td className="table-success">{item.id}</td>
              <td className="table-success">{item.name}</td>
              <td className="table-success">{item.email}</td>
-             <td className="table-success" > <button onClick={() => DeleteStudents(item.id)}>Delete</button></td>
-             <td className="table-success"><button onClick={()=>navigate(`/updatestu?students=${item.id}&id=${id}`)}>Update</button></td>
+             <td className="table-success" > <button class="btn btn-danger" onClick={() => DeleteStudents(item.id)}>Delete</button></td>
+             <td className="table-success"><button class="btn btn-warning" onClick={()=>navigate(`/updatestu?students=${item.id}&id=${id}`)}>Update</button></td>
             </tr>
             </>
           ))}
@@ -67,7 +77,7 @@ function GetCollegeById() {
         <p>Loading...</p>
       )}
       </table>
-      <button onClick={()=>navigate(`/addstudents?colleges=${id}`)}>Add Students</button>
+      <button className="btn btn-success" onClick={()=>navigate(`/addstudents?colleges=${id}`)}>Add Students</button>
       </center>
     </div>
  );

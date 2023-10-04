@@ -59,13 +59,13 @@ function AllColleges() {
              <td className="table-success"  id="name" >{item.id}</td>
              <td className="table-success" >{item.name}</td>
              <td className="table-success" id="location" >{item.location}</td>
-             <td className="table-success"><button onClick={() => ShowStudents(item.id)}>ShowStudents</button></td>
+             <td className="table-success"><button className="btn btn-info" onClick={() => ShowStudents(item.id)}>ShowStudents</button></td>
              
-            <td className="table-success" > <button onClick={() => DeleteCollege(item.id)}>Delete</button></td>
+            <td className="table-success" > <button  className="btn btn-danger" onClick={() => DeleteCollege(item.id)}>Delete</button></td>
 
-             <td className="table-success"><button onClick={()=>navigate(`/update?colleges=${item.id}`)}>Update</button></td>
+             <td className="table-success"><button className="btn btn-warning" onClick={()=>navigate(`/update?colleges=${item.id}`)}>Update</button></td>
        
-             <td className="table-success"><button onClick={()=>navigate(`/addstudents?colleges=${item.id}`)}>Add Students</button></td>
+             <td className="table-success"><button className="btn btn-success" onClick={()=>navigate(`/addstudents?colleges=${item.id}`)}>Add Students</button></td>
             </tr>
             </>
           ))}
