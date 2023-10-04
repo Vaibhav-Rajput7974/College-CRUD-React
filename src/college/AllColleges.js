@@ -2,12 +2,24 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { deleteClg} from '../slices/CollegeCrud';
+import { deleteClg, getAllCollege} from '../slices/CollegeCrud';
 import { getStudents } from '../slices/StudentCrud';
 
 function AllColleges() {
   const navigate=useNavigate();
   const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/users/');
+        dispatch(getAllCollege(response.data));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+
+  }, []); 
   
   const {colleges} = useSelector((state) => state.AllCollege)
   
@@ -15,7 +27,6 @@ function AllColleges() {
     axios.delete('/users/'+id)
       .then((response) => {
         dispatch(deleteClg(response.data));
-        navigate('/home')
         console.log('Data successfully posted:', response.data);
       })
       .catch((error) => {

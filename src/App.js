@@ -11,31 +11,13 @@ import AddStudents from './college/AddStudents';
 import Update from './college/Update';
 import Updatestu from './college/Updatestu';
 function App() {
-  const dispath=useDispatch();
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/users/');
-        dispath(getAllCollege(response.data));
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-
-  }, []); 
-  
-  
-
-
   return (
     <div className="App">
       <BrowserRouter>
         <Routes path="/">
-          <Route   path='home'  element={<AllColleges/>}/>
+          <Route index element={<AllColleges />} />
+          <Route exact  path='home'  element={<AllColleges/>}/>
           <Route  path='add'  element={<AddCollege/>}/>
-          <Route  path=''  element={<AddCollege/>}/>
           <Route path='getCollege/id' element={<GetCollegeById/>}/>
           <Route path='addstudents' element={<AddStudents/>}/>
           <Route path='update' element={<Update/>}/>

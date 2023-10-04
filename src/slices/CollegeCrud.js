@@ -7,7 +7,7 @@ const intialState={
 const CollegeCrud=createSlice({
     name:"CollegeCrud",
     initialState:intialState,
-    reducers:{
+    reducers:{ 
         getAllCollege:(state,action)=>{
             state.colleges=action.payload;
         },

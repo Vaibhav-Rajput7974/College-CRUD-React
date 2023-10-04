@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { deleteStudents } from '../slices/StudentCrud';
-import { deleteStudentClg } from '../slices/CollegeCrud';
+import { deleteStudentClg, getAllCollege } from '../slices/CollegeCrud';
 
 function GetCollegeById() {
   const navigate = useNavigate();
@@ -13,17 +13,20 @@ function GetCollegeById() {
   const queryParams = new URLSearchParams(window.location.search)
   const id = queryParams.get("id")
   
-  const[students,setstudents] =useState(null);
-  useEffect(() => {
-    axios.get('/users/'+id+'/students')
-    .then((response) => { 
-      setstudents(response.data);
-    })
-    .catch((error) => {
-      console.error('Error posting data:', error);
-  });
-  }, []); 
+  const students = colleges?.find(college => college?.id == id)?.students;
   
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/users/');
+        dispatch(getAllCollege(response.data));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []); 
+
   function DeleteStudents(DeleteId) {  
     console.log(DeleteId);
     axios.delete('/users/students/'+DeleteId)
@@ -34,7 +37,6 @@ function GetCollegeById() {
             response:response.data
           }
         ));
-        //navigate(`/getCollege/id?colleges=${DeleteId}`);
         console.log('Data successfully posted:', response.data);
       })
       .catch((error) => {
