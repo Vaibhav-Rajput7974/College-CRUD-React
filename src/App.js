@@ -9,6 +9,7 @@ import AllColleges from './college/AllColleges';
 import GetCollegeById from './college/GetCollegeById';
 import AddStudents from './college/AddStudents';
 import Update from './college/Update';
+import Updatestu from './college/Updatestu';
 function App() {
   const dispath=useDispatch();
   
@@ -38,6 +39,7 @@ function App() {
           <Route path='getCollege/id' element={<GetCollegeById/>}/>
           <Route path='addstudents' element={<AddStudents/>}/>
           <Route path='update' element={<Update/>}/>
+          <Route path='updatestu' element={<Updatestu/>}/>
           
           
         </Routes>

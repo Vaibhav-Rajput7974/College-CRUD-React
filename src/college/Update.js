@@ -31,7 +31,7 @@ const Update = () => {
 
     useEffect(() => {
         axios.get('/users/'+colleges,)
-        .then((response) => {
+        .then((response) => { 
             setData(response.data);
         })
         .catch((error) => {
@@ -44,11 +44,11 @@ const Update = () => {
     <form >
   <div class="form-group">
     <label for="exampleInputEmail1">College Name</label>
-    <input type="text" class="form-control" id="name"  />
+    <input type="text" class="form-control" defaultValue={data?.name} id="name"  />
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">location</label>
-    <input type="text" class="form-control" id="location"  />
+    <input type="text" class="form-control" id="location" defaultValue={data?.location} />
   </div>
   <div class="form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1"/>

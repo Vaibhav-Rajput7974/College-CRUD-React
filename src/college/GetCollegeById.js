@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { deleteStudents } from '../slices/StudentCrud';
+import { deleteStudentClg } from '../slices/CollegeCrud';
 
 function GetCollegeById() {
   const navigate = useNavigate();
@@ -11,16 +12,20 @@ function GetCollegeById() {
   const {colleges} = useSelector((state) => state.AllCollege);
   const queryParams = new URLSearchParams(window.location.search)
   const id = queryParams.get("id")
-  // con???sole.log(id);
+  
   const {students} = colleges.find(college => college.id == id);
-  // console.log(students);
 
-  function DeleteStudents(id) {  
-    console.log(id);
-    axios.delete('/users/students/'+id)
+  function DeleteStudents(DeleteId) {  
+    console.log(DeleteId);
+    axios.delete('/users/students/'+DeleteId)
       .then((response) => {
-        dispatch(deleteStudents(response.data));
-        navigate(`/getCollege/id?colleges=${id}`);
+        dispatch(deleteStudentClg(
+          {
+            id: id,
+            response:response.data
+          }
+        ));
+        //navigate(`/getCollege/id?colleges=${DeleteId}`);
         console.log('Data successfully posted:', response.data);
       })
       .catch((error) => {
@@ -52,10 +57,8 @@ function GetCollegeById() {
              <td className="table-success">{item.id}</td>
              <td className="table-success">{item.name}</td>
              <td className="table-success">{item.email}</td>
-             {/* <td className="table-success"><button onClick={() => ShowStudents(item.id)}>Update</button></td>
-              */}
              <td className="table-success" > <button onClick={() => DeleteStudents(item.id)}>Delete</button></td>
-             <td className="table-success" > <button >Update</button></td>
+             <td className="table-success"><button onClick={()=>navigate(`/updatestu?students=${item.id}&id=${id}`)}>Update</button></td>
             </tr>
             </>
           ))}
@@ -64,7 +67,7 @@ function GetCollegeById() {
         <p>Loading...</p>
       )}
       </table>
-      <td className="table-success"><button onClick={()=>navigate(`/addstudents?colleges`)}>addStudents</button></td>
+      <button onClick={()=>navigate(`/addstudents?colleges=${id}`)}>Add Students</button>
       </center>
     </div>
  );

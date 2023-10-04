@@ -31,16 +31,34 @@ const CollegeCrud=createSlice({
         },
         addClgInStudents :(state,action)=>{
             const { id, response } = action.payload;
-           console.log(response,id);
-           const index = state.colleges.findIndex(college => college.id == id);
+            console.log(response,id);
+            const index = state.colleges.findIndex(college => college.id == id);
             console.log(index);
             if(index!==-1){
                 state.colleges[index].students.push(response);
             }
         },
+        deleteStudentClg: (state,action)=>{
+
+            const { id, response } = action.payload;
+            console.log(response,id);
+            const index = state.colleges.findIndex(college => college.id == id);
+            if(index!==-1){
+                state.colleges[index].students = state.colleges[index].students.filter((item) => item.id !== response.id);
+            }
+        },
+        updateStudentClg: (state,action)=>{
+
+            const { id, response } = action.payload;
+            console.log(response,id);
+            const index = state.colleges.findIndex(college => college.id == id);
+            if(index!==-1){
+                state.colleges[index].students = state.colleges[index].students.map((item) => item.id === response.id ? response : item);
+            }
+        },
         
-        
+
     }
 });
-export const{getAllCollege,addCollege,deleteClg,updateCollege,addClgInStudents} = CollegeCrud.actions;
+export const{getAllCollege,addCollege,deleteClg,updateCollege,addClgInStudents,deleteStudentClg,updateStudentClg} = CollegeCrud.actions;
 export default CollegeCrud.reducer;
