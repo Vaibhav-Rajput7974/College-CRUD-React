@@ -79,7 +79,9 @@ function GetCollegeById() {
         <p>Loading...</p>
       )}
       </table>
-      <button className="btn btn-success" onClick={()=>navigate(`/addstudents?colleges=${id}`)}>Add Students</button>
+      <button className="btn btn-success" onClick={()=>navigate(`/addstudents?colleges=${id}`)}>Add Students</button><br/>
+      <button className="btn btn-success" onClick={()=>navigate(`/home`)}>Home</button>
+      
       </center>
     </div>
  );
