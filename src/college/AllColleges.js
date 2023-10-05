@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { deleteClg, getAllCollege} from '../slices/CollegeCrud';
-import { getStudents } from '../slices/StudentCrud';
 
 function AllColleges() {
   const navigate=useNavigate();

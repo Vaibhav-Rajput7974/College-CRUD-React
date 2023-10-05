@@ -10,10 +10,12 @@ import GetCollegeById from './college/GetCollegeById';
 import AddStudents from './college/AddStudents';
 import Update from './college/Update';
 import Updatestu from './college/Updatestu';
+import NavBar from './college/NavBar';
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <NavBar/>
         <Routes path="/">
           <Route index element={<AllColleges />} />
           <Route exact  path='home'  element={<AllColleges/>}/>

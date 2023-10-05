@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import axios from 'axios';
-import { addStudents } from '../slices/StudentCrud';
 import { addClgInStudents } from '../slices/CollegeCrud';
 
 const AddStudents = (props) => {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { deleteStudents } from '../slices/StudentCrud';
 import { deleteStudentClg, getAllCollege } from '../slices/CollegeCrud';
 
 function GetCollegeById() {
@@ -43,12 +42,10 @@ function GetCollegeById() {
         console.error('Error posting data:', error);
       });
     };
-    
-    
-    
-  // console.log('sssssss',students);
+
   return (
     <div>
+
       <h2>Student Management</h2>
        <center>
 <table class="table table-bordered table-hover">
@@ -80,7 +77,6 @@ function GetCollegeById() {
       )}
       </table>
       <button className="btn btn-success" onClick={()=>navigate(`/addstudents?colleges=${id}`)}>Add Students</button><br/>
-      <button className="btn btn-success" onClick={()=>navigate(`/home`)}>Home</button>
       
       </center>
     </div>
